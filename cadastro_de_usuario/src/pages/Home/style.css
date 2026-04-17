@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    margin: 30px auto;
+    color: aliceblue;
+}
+
+.container form{
+    background: rgba(170, 59, 255, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container form h1 {
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.container form input {
+    padding: 7px;
+    margin: 5px 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.989);
+    text-align: center;
+}
+
+.container form button:hover {
+    background-color: rgba(205, 156, 243, 0.1);
+}
+
+.container form button {
+    padding: 7px;
+    margin: 5px 40px;
+    border: none;
+    border-radius: 10px;
+    background: #000;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+
+.container div{
+    display: flex;
+    flex-direction: column;
+    color: rgb(41, 41, 255);
+    gap: 10px;
+    margin: 40px 10px
+}
