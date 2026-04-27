@@ -1,44 +1,103 @@
 import { useState, useEffect } from "react";
-import './style.css'
+import api from "../../services/api";
+import "./style.css";
 
 function Home() {
 
-  // conecta com meu banco de dados mongodb e pega os dados dos usuarios cadastrados
-  
-  const users = [
-    {
-      id: "ds48ds5d1s",
-			name: "jota",
-			age: 63,
-			email: "pedro@gmail.com"
-    }
-  ];
+  const [users, setUsers] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
 
-  
-  //roda o servidro: npm run dev
+  useEffect(() => {
+    async function loadUsers() {
+      try {
+        const response = await api.get("/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
+    }
+
+    loadUsers();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await api.post("/users", {
+        name,
+        email,
+        age: Number(age)
+      });
+
+      const response = await api.get("/users");
+      setUsers(response.data);
+
+      // limpa inputs
+      setName("");
+      setEmail("");
+      setAge("");
+
+    } catch (error) {
+      console.error("Erro ao cadastrar:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await api.delete(`/users/${id}`);
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error("Erro ao deletar:", error);
+    }
+  };
 
   return (
-    <>
-      <div className='container'>
-        <form action="">
-            <h1>Cadastro de Usuário</h1>
-            <input type="text" placeholder='Digite seu nome' />
-            <input type="email" placeholder='Digite seu email' />
-            <input type="age" placeholder='Digite sua Idade' />
-            <button type='submit'>Cadastrar</button>
-        </form>
+    <div className="container">
 
-        {users.map((item)=> (
-          <div key={item.id}>
-            <p>{item.name}</p>
-            <p>{item.email}</p>
-            <p>{item.age}</p>
-          </div>
-        ))}
+      <form onSubmit={handleSubmit}>
+        <h1>Cadastro de Usuário</h1>
 
-      </div>
-    </>
-  )
+        <input
+          type="text"
+          placeholder="Digite seu nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          type="email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Digite sua idade"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+
+        <button type="submit">Cadastrar</button>
+      </form>
+
+      {users.map((item) => (
+        <div className="user-card" key={item.id}>
+          <p>{item.name}</p>
+          <p>{item.email}</p>
+          <p>{item.age}</p>
+
+          <button onClick={() => handleDelete(item.id)}>
+            Deletar
+          </button>
+        </div>
+      ))}
+
+    </div>
+  );
 }
 
-export default Home
+export default Home;
