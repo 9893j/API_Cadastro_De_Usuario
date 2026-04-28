@@ -1,4 +1,4 @@
-# 🚀 Cadastro de Usuários - FullStack
+#  Cadastro de Usuários - FullStack
 
 Aplicação FullStack para gerenciamento de usuários, com integração completa entre frontend e backend.
 
@@ -13,8 +13,7 @@ O propósito também é explorar ao máximo essas ferramentas, entendendo como e
 ### Front End
 
 <img width="449" height="466" alt="image" src="https://github.com/user-attachments/assets/27133f08-c76f-4b68-a54f-90ba7dba6756" />
-
-### Back end
+<br>
 
 <img width="1902" height="1030" alt="20260427-1908-39 3726869" src="https://github.com/user-attachments/assets/0df491dd-19d5-4547-96ba-b11285e42633" />
 
